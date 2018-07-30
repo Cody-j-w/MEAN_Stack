@@ -1,6 +1,9 @@
 
 
 function insertIntoHeap(heap, val){
+    if(heap.length<1){
+        heap[0] == undefined;
+    }
     heap.push(val)
     for(x=1; x<heap.length;x++){
         console.log(heap)
