@@ -47,3 +47,39 @@ heap = [undefined, 3,4,6,12,8,14,16,18,20,21,24];
 
 console.log(heap)
 console.log(insertIntoHeap(heap, 1))
+
+function removeFromHeap(heap){
+    var temp = 0;
+    if(heap.length>1){
+        temp = heap[1];
+        heap[1] = heap[heap.length-1];
+        heap[heap.length-1] = temp;
+    }
+    value = heap[heap.length-1];
+    heap.pop();
+    for(x = 1; x<heap.length; x++){
+        if(heap[x*2]<(heap[(x*2)+1])){
+            if(heap[x]>heap[x*2]){
+                temp = heap[x];
+                heap[x] = heap[x*2];
+                heap[x*2] = temp;
+                x = x*2
+            }
+            
+        }
+        else{
+            if(heap[x]>heap[(x*2)+1]){
+                temp = heap[x];
+                heap[x] = heap[(x*2)+1];
+                heap[(x*2)+1] = temp;
+                x = (x*2)+1
+            }
+                
+        }
+        
+    }
+    console.log(heap);
+    return value;
+}
+
+console.log(removeFromHeap(heap))
