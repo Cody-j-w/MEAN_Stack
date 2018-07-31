@@ -75,6 +75,24 @@ function BST(){
         }
         console.log(root.val)
     }
+
+    this.find_depth = function(root){
+        if(!root){
+            return 0;
+        }
+        else{
+            var left_depth = this.find_depth(root.left);
+            var right_depth = this.find_depth(root.right);
+
+            if(left_depth>right_depth){
+                return left_depth+1;
+            }
+            else{
+                return right_depth+1;
+            }
+        }
+
+    }
 }
 
 
@@ -82,4 +100,4 @@ newBST = new BST;
 
 console.log(newBST.insert(40).insert(25).insert(70).insert(50).insert(16).insert(90).insert(150).insert(20).insert(45).insert(75).insert(30))
 
-console.log(newBST.in_order_traverse(newBST.root))
+console.log(newBST.find_depth(newBST.root))
