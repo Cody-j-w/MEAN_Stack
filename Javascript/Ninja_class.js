@@ -17,11 +17,26 @@ function Ninja(name){
         console.log(self.name+"'s health is at: "+self.health)
     }
 
+    this.punch = function(opponent){
+        if(opponent instanceof Ninja){
+            opponent.health -=5;
+            console.log(self.name+' punches '+opponent.name+' for 5 damage!')
+        }
+    }
+    this.kick = function(opponent){
+        if(opponent instanceof Ninja){
+            opponent.health -=(15*strength);
+            console.log(self.name+' kicks '+opponent.name+' for '+(15*strength)+' damage!')
+        }
+    }
+
 
 
 }
 
 var ryu = new Ninja('Ryu');
-ryu.sayName();
-ryu.showStats();
-ryu.drinkSake();
+
+
+var ken = new Ninja('Ken');
+
+ryu.kick(ken);
