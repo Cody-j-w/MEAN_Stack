@@ -35,9 +35,7 @@ function BST(){
                 else if(x<runner.val){
                     runner = runner.left;
                 }
-            
-                
-                
+                                            
             }
             
             return this;

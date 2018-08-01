@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script
+			  src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+              crossorigin="anonymous"></script>
+
+        <script>
+            $(document).ready(function(){
+                
+                    $('#div1').click(function(){
+                        $.get("https://opentdb.com/api.php?amount=9&category=16&type=multiple", function(data){
+                            
+                        $('#1').html(data.results[1].question)
+                        for(let x in data.results[1].incorrect_answers){
+                            $('#div1').append('<button>'+data.results[1].incorrect_answers[x]+'</button>')
+                            
+                        }
+                        $('#div1').append('<button>'+data.results[1].correct_answer+'</button>')
+                        })
+                    })
+                    $('#div2').click(function(){
+                        $.get("https://opentdb.com/api.php?amount=9&category=16&type=multiple", function(data){
+                    
+                        
+                        $('#2').html(data.results[2].question)
+                        for(let x in data.results[2].incorrect_answers){
+                            $('#div2').append('<button>'+data.results[2].incorrect_answers[x]+'</button>')
+                            
+                        }
+                        $('#div2').append('<button>'+data.results[2].correct_answer+'</button>')
+                        })
+                    })
+                    $('#div3').click(function(){
+                        $.get("https://opentdb.com/api.php?amount=9&category=16&type=multiple", function(data){
+                    
+                        
+                        $('#3').html(data.results[3].question)
+                        for(let x in data.results[3].incorrect_answers){
+                            $('#div3').append('<button>'+data.results[3].incorrect_answers[x]+'</button>')
+                            
+                        }
+                        $('#div3').append('<button>'+data.results[3].correct_answer+'</button>')
+                        })
+                    })
+                    $('#div4').click(function(){
+                        $.get("https://opentdb.com/api.php?amount=9&category=16&type=multiple", function(data){
+                    
+                        
+                        $('#4').html(data.results[4].question)
+                        for(let x in data.results[4].incorrect_answers){
+                            $('#div4').append('<button>'+data.results[4].incorrect_answers[x]+'</button>')
+                            
+                        }
+                        $('#div4').append('<button>'+data.results[4].correct_answer+'</button>')
+                        })
+                    })
+                    $('#div5').click(function(){
+                        $.get("https://opentdb.com/api.php?amount=9&category=16&type=multiple", function(data){
+                    
+                        
+                        $('#5').html(data.results[5].question)
+                        for(let x in data.results[5].incorrect_answers){
+                            $('#div5').append('<button>'+data.results[5].incorrect_answers[x]+'</button>')
+                            
+                        }
+                        $('#div5').append('<button>'+data.results[5].correct_answer+'</button>')
+                        })
+                    })
+                    $('#div6').click(function(){
+                        $.get("https://opentdb.com/api.php?amount=9&category=16&type=multiple", function(data){
+                    
+                        
+                        $('#6').html(data.results[6].question)
+                        for(let x in data.results[6].incorrect_answers){
+                            $('#div6').append('<button>'+data.results[6].incorrect_answers[x]+'</button>')
+                            
+                        }
+                        $('#div6').append('<button>'+data.results[6].correct_answer+'</button>')
+                        })
+                    })
+                    $('#div7').click(function(){
+                        $.get("https://opentdb.com/api.php?amount=9&category=16&type=multiple", function(data){
+                    
+                        
+                        $('#7').html(data.results[7].question)
+                        for(let x in data.results[7].incorrect_answers){
+                            $('#div7').append('<button>'+data.results[7].incorrect_answers[x]+'</button>')
+                            
+                        }
+                        $('#div7').append('<button>'+data.results[7].correct_answer+'</button>')
+                        })
+                    })
+                    $('#div8').click(function(){
+                        $.get("https://opentdb.com/api.php?amount=9&category=16&type=multiple", function(data){
+                    
+                        
+                        $('#8').html(data.results[8].question)
+                        for(let x in data.results[8].incorrect_answers){
+                            $('#div8').append('<button>'+data.results[8].incorrect_answers[x]+'</button>')
+                            
+                        }
+                        $('#div8').append('<button>'+data.results[8].correct_answer+'</button>')
+                        })
+                    })
+                    $('#div0').click(function(){
+                        $.get("https://opentdb.com/api.php?amount=9&category=16&type=multiple", function(data){
+                    
+                        
+                        $('#0').html(data.results[0].question)
+                        for(let x in data.results[0].incorrect_answers){
+                            $('#div0').append('<button>'+data.results[0].incorrect_answers[x]+'</button>')
+                            
+                        }
+                        $('#div0').append('<button>'+data.results[0].correct_answer+'</button>')
+                        })
+                    })
+                        
+                
+            })
+        
+              
+                
+               
+        </script>
+    
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="jumbotron col-12 bg-light">
+            <h1 class="text-center text-primary">Welcome to Trivia!</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div id='div1' class="col-3 jumbotron rounded bg-info text-dark">
+                    <p id='1'></p>
+                    
+                    
+                    
+                    
+
+            </div>
+            <div  class="col-1"></div>
+            <div id='div2' class="col-3 jumbotron rounded bg-info text-dark">
+                    <p id='2'></p>
+                    
+                    
+                    
+                    
+            </div>
+            <div class="col-1"></div>
+            <div id='div3' class="col-3 jumbotron rounded bg-info text-dark">
+                    <p id='3'></p>
+                    
+                    
+                    
+                    
+            </div>
+            <div class="col-1"></div>
+        
+        
+            <div id='div4' class="col-3 jumbotron rounded bg-info text-dark">
+                    <p id='4'></p>
+                    
+                    
+                    
+                    
+            </div>
+            <div class="col-1"></div>
+            <div id='div5' class="col-3 jumbotron rounded bg-info text-dark">
+                    <p id='5'></p>
+            </div>
+            <div class="col-1"></div>
+            <div id='div6' class="col-3 jumbotron rounded bg-info text-dark">
+                    <p id='6'></p>
+            </div>
+            <div  class="col-1"></div>
+        
+        
+            <div id='div7' class="col-3 jumbotron rounded bg-info text-dark">
+                    <p id='7'></p>
+            </div>
+            <div  class="col-1"></div>
+            <div id='div8' class="col-3 jumbotron rounded bg-info text-dark">
+                    <p id='8'></p>
+            </div>
+            <div  class="col-1"></div>
+            <div id='div0' class="col-3 jumbotron rounded bg-info text-dark">
+                    <p id='0'></p>
+            </div>
+            <div  class="col-1"></div>
+    
+        
+            
+        
+        
+        
+    </div>
+    
+</body>
+</html>
