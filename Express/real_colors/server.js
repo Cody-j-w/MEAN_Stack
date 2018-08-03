@@ -9,20 +9,24 @@ app.set("view engine", "ejs");
 
 
 require("./server/config/routes")(app);
-let click = 0;
+var color = 'green';
 io.on('connection', function(socket){
     console.log('a user has connected!')
-    
-    io.emit('return', {click:click})
-    
-    socket.on('click', function(){
-        console.log('clicked!')
-        click +=1
-        io.emit('return', {click:click})
+    io.emit('color', {color:color})
+
+    socket.on('blue', function(data){
+        color = 'blue';
         
+        io.emit('color', {color:color})
     })
-    socket.on('reset', function(){
-        click = 0;
-        io.emit('return', {click:click})
+    socket.on('green', function(data){
+        color = 'green';
+        
+        io.emit('color', {color:color})
+    })
+    socket.on('pink', function(data){
+        color = 'pink';
+        
+        io.emit('color', {color:color})
     })
 })
