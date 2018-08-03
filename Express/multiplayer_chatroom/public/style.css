@@ -1,0 +1,8 @@
+#chat_window{
+    height:500px;
+    background-color: aliceblue;
+    margin-top:100px;
+}
+#message{
+    margin-left:1.8rem;
+}
