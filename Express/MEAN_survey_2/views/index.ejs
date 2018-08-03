@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        var socket = io();
+        $('#survey_form').submit(function(event){
+            console.log('survey submitted')
+            event.preventDefault();
+            // var first = $('#first_name').val()
+            // var last = $('#last_name').val()
+            // var location = $('#location').val()
+            // var language = $('#language').val()
+
+            var user_info = {
+                first_name:$('#first_name').val(),
+                last_name:$('#last_name').val(),
+                location:$('#location').val(),
+                language:$('#language').val()
+            }
+            socket.emit('user_info', {user_info:user_info})
+        });
+        socket.on('details', function(data){
+            console.log('final info sent')
+            $('#display_window').html(`<p class="text-info text-center">You emitted the following information to the server: First name: ${data.user_info.first_name},
+                                    Last name: ${data.user_info.last_name},
+                                    Location: ${data.user_info.location},
+                                    Language: ${data.user_info.language},
+                                    Random Number: ${data.randnum}</p>`)
+        })
+    });
+    </script>
+</head>
+<body class="bg-secondary">
+    <div class="bg-dark mx-auto col-6" id="display_window">
+
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="jumbotron mx-auto bg-dark col-6">
+                <form id='survey_form'>
+                    <input type="text" name="first_name" class="form-control" id="first_name" placeholder="first name">
+                    <input type="text" name="last_name" class="form-control" id="last_name" placeholder="last name">
+                    <select name="location" id='location' class="form-control">
+                        <option>Tulsa</option>
+                        <option>Dallas</option>
+                        <option>Seattle</option>
+                        <option>DC</option>
+                        <option>LA</option>
+                    </select>
+                    <select name="language" id='language' class="form-control">
+                        <option>JavaScript</option>
+                        <option>Python</option>
+                        <option>C#</option>
+                        <option>HTML</option>
+                        <option>Assembly</option>
+                    </select>
+                    <input type="submit" value="submit" class="btn btn-info text-dark text-center w-100">
+                </form>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>
