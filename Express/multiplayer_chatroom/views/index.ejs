@@ -13,11 +13,21 @@
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script type="text/javascript">
     $(document).ready(function(){
+        $('#chat_window').hide();
+        $('#fight').hide();
+        $('#test_your_might').hide();
+        $('#message_form').hide();
+        $('#fight_picker').hide();
         var socket = io();
         var user = prompt('Please enter your name to chat')
         if(user != null){
+            $('#chat_window').show();
+            $('#fight').show();
+            $('#message_form').show();
+
             socket.emit('sign-in', {user:user})
         }
+        
         $('#send_btn').submit(function(event){
             event.preventDefault();
             var new_message ={
@@ -26,17 +36,94 @@
             }
             console.log(new_message)
             $('#message').val('')
-            socket.emit('new_message', {new_message:new_message})
+            socket.emit('new_message', {new_message : new_message})
         });
+        $('#match_listing').submit(function(event){
+            event.preventDefault();
+            $('#match').val();
+            socket.emit('challenge', {opponent:$('#match').val(), fighter_id:$('#fighter_select').val()})
+        })
+        $('#strike').click(function(){
+            socket.emit('strike')
+        })
+        $('#block').click(function(){
+            socket.emit('defend')
+        })
+        $('#feign').click(function(){
+            socket.emit('feign')
+        })
+        $('#break').click(function(){
+            socket.emit('break')
+        })
+        $('#recover').click(function(){
+            socket.emit('heal')
+        })
         socket.on('return', function(data){
+
             for(x in data.messages){
             $('.chat_header').append(`<p>${data.messages[x].name}: ${data.messages[x].message}</p>`)
             }
+            $('#chat_window').scrollTop($('#chat_window')[0].scrollHeight - $('#chat_window')[0].clientHeight);
         })
         socket.on('latest_message', function(data){
+            
             $('.chat_header').append(`<p>${data.latest_message.name}: ${data.latest_message.message}</p>`)
+            $('#chat_window').scrollTop($('#chat_window')[0].scrollHeight - $('#chat_window')[0].clientHeight);
         })
-      
+        
+        $('#fight').click(function(){
+            $('#join_the_fight').hide();
+            $('#test_your_might').show();
+            $('#fight_picker').show();
+            name = user;
+            socket.emit('new_challenger', {name:name})
+        });
+        
+        // socket.on('fight_time', function(data){
+        //     for(x=0; x<data.contenders.length; x++){
+        //         $('#match').append(`<option value='${data.contenders[x]}'>${data.contenders[x].name}</option>`)
+        //         $('#fighter_select').append(`<option value='${data.contenders[x]}'>${data.contenders[x].name}</option>`)
+        //     }
+        // })
+        socket.on('challenged', function(data){
+            $('.chat_header').append(`<p>${data.user.name} has challenged ${data.opponent.name} to a fight!`)
+            $('#chat_window').scrollTop($('#chat_window')[0].scrollHeight - $('#chat_window')[0].clientHeight);
+        })
+        socket.on('stunned', function(data){
+            $('.chat_header').append(`<p>${data.user.alert}</p>`)
+            $('#chat_window').scrollTop($('#chat_window')[0].scrollHeight - $('#chat_window')[0].clientHeight);
+        })
+        socket.on('opponent_stunned', function(data){
+            $('.chat_header').append(`<p>${data.user.name} is stunned.</p>`)
+            $('#chat_window').scrollTop($('#chat_window')[0].scrollHeight - $('#chat_window')[0].clientHeight);
+        })
+        socket.on('attack', function(data){
+            console.log(data.user, data.opponent)
+            if(data.user.status == 1){
+            $('.chat_header').append(`<p>${data.user.name} strikes ${data.opponent.name} for 10 damage!`)
+            $('#chat_window').scrollTop($('#chat_window')[0].scrollHeight - $('#chat_window')[0].clientHeight);
+            }
+            else if(data.user.status == 2){
+                $('.chat_header').append(`<p>${data.opponent.name} blocks ${data.user.name}'s attack!`)
+                $('#chat_window').scrollTop($('#chat_window')[0].scrollHeight - $('#chat_window')[0].clientHeight);
+            }
+        })
+        socket.on('block_up', function(data){
+                $('.chat_header').append(`<p>${data.user.name} goes into a defensive stance!`)
+                $('#chat_window').scrollTop($('#chat_window')[0].scrollHeight - $('#chat_window')[0].clientHeight);
+        })
+        socket.on('guard_break', function(data){
+            $('.chat_header').append(`<p>${data.user.name} breaks through ${data.opponent.name}'s defenses!`)
+            $('#chat_window').scrollTop($('#chat_window')[0].scrollHeight - $('#chat_window')[0].clientHeight);
+        })
+        socket.on('recovered', function(data){
+            $('.chat_header').append(`<p>${data.user.name} recovers!`)
+            $('#chat_window').scrollTop($('#chat_window')[0].scrollHeight - $('#chat_window')[0].clientHeight);
+        })
+        socket.on('game_over', function(data){
+            $('.chat_header').append(`<p>${data.user.name} is victorious over ${data.opponent.name}!`)
+            $('#chat_window').scrollTop($('#chat_window')[0].scrollHeight - $('#chat_window')[0].clientHeight);
+        })
         
     });
     </script>
@@ -45,17 +132,57 @@
     
     <div class="container">
         <div class="row">
-        <div id="chat_window" class="col-6 mx-auto">
+        <div id="chat_window" class=" jumbotron bg-light col-6 mx-auto">
             <div class="chat_header"></div>
         </div>
         </div>
         <div class="row">
-            <div class="mx-auto col-7">
+            <div id='message_form' class="mx-auto col-7">
             <form id='send_btn'>
                 <input type="text" class="form-control col-8 d-inline-block" value="" id="message"><!--
              --><input type="submit" class="btn btn-info text-dark col-3 form-control d-inline-block" value="Send">
             </form>
         </div>
+        </div>
+        <hr class="my-3 bg-danger col-8">
+        <div class="row">
+            <div id="fight_picker" class="col-6 mx-auto">
+                
+                <form id="match_listing">
+                    <select id="fighter_select" class="form-control col-8 d-inline-block">
+                        <option id="match_header" disabled>Select fighter</option>
+                        <option value="0">Ryu</option>
+                        <option value="1">Ken</option>
+                        <option value="2">Necalli</option>
+                        <option value="3">Laura</option>
+                        <option value="4">Cammy</option>
+                        <option value="5">Bison</option>
+                    </select>
+                    <select id="match" class="form-control col-8 d-inline-block">
+                        <option id="match_header" disabled>Select opponent</option>
+                        <option value="0">Ryu</option>
+                        <option value="1">Ken</option>
+                        <option value="2">Necalli</option>
+                        <option value="3">Laura</option>
+                        <option value="4">Cammy</option>
+                        <option value="5">Bison</option>
+                    </select><!--
+                    --><input type="submit" class="btn btn-info col-4 d-inline-block" value="Fight!">
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 mx-auto" id="join_the_fight">
+                <button id="fight" class="btn btn-danger text-dark mx-auto w-100" >Join the fight!</button>
+            </div>
+            <div id="test_your_might" class="mx-auto col-8">
+                <div class="col-2"></div><!--
+             --><button id="strike" class="btn btn-danger text-dark col-2">Strike!</button><!--  
+             --><button id="block" class="btn btn-primary text-light col-2">Block!</button><!--
+             --><button id="feign" class="btn btn-info text-light col-2">Feign!</button><!--  
+             --><button id="break" class="btn btn-warning text-dark col-2">Break!</button><!--  
+             --><button id="recover" class="btn btn-success text-light col-2">Recover!</button>
+            </div>
         </div>
     
     
