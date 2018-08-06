@@ -6,7 +6,7 @@ app.use(session({
     secret:'notasecret',
     resave: false,
     saveUninitialized: true,
-    cooke: {maxAge: 60000}
+    cookie: {maxAge: 60000}
 }))
 app.use(bodyParser.urlencoded({extended:true}));
 
