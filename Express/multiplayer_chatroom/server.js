@@ -172,8 +172,6 @@ io.on('connection', function(socket){
         user.opponent = data.opponent;
         console.log(user.fighter)
         console.log(user.opponent)
-        // console.log(opponent);
-        // console.log(fighter)
         io.emit('challenged', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
     })
     socket.on('strike', function(){
