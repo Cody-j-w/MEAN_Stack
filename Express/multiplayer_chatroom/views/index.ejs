@@ -79,12 +79,7 @@
             socket.emit('new_challenger', {name:name})
         });
         
-        // socket.on('fight_time', function(data){
-        //     for(x=0; x<data.contenders.length; x++){
-        //         $('#match').append(`<option value='${data.contenders[x]}'>${data.contenders[x].name}</option>`)
-        //         $('#fighter_select').append(`<option value='${data.contenders[x]}'>${data.contenders[x].name}</option>`)
-        //     }
-        // })
+        
         socket.on('challenged', function(data){
             $('.chat_header').append(`<p>${data.user.name} has challenged ${data.opponent.name} to a fight!`)
             $('#chat_window').scrollTop($('#chat_window')[0].scrollHeight - $('#chat_window')[0].clientHeight);
@@ -101,6 +96,8 @@
             console.log(data.user, data.opponent)
             if(data.user.status == 1){
             $('.chat_header').append(`<p>${data.user.name} strikes ${data.opponent.name} for 10 damage!`)
+            $('.chat_header').append(`<p>${data.user.name}: ${data.user.health}`)
+            $('.chat_header').append(`<p>${data.opponent.name}: ${data.opponent.health}`)
             $('#chat_window').scrollTop($('#chat_window')[0].scrollHeight - $('#chat_window')[0].clientHeight);
             }
             else if(data.user.status == 2){
@@ -113,7 +110,12 @@
                 $('#chat_window').scrollTop($('#chat_window')[0].scrollHeight - $('#chat_window')[0].clientHeight);
         })
         socket.on('guard_break', function(data){
+            if(data.opponent.block == true){
             $('.chat_header').append(`<p>${data.user.name} breaks through ${data.opponent.name}'s defenses!`)
+            }
+            else{
+            $('.chat_header').append(`<p>${data.user.name} loses balance and is stunned!`)
+            }
             $('#chat_window').scrollTop($('#chat_window')[0].scrollHeight - $('#chat_window')[0].clientHeight);
         })
         socket.on('recovered', function(data){

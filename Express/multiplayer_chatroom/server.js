@@ -15,7 +15,7 @@ var messages = [];
 class Fighter{
     constructor(name){
         this.name = name;
-        this.health = 100;
+        this.health = 50;
         this.block = false;
         this.stunned = false;
         this.turn_over = false;
