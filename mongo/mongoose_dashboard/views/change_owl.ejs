@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-secondary">
+    <div class="container">
+        <div class="row">
+            <div class="jumbotron mx-auto bg-dark col-6">
+                    <%- JSON.stringify(messages) %> 
+                    
+                    <% if(messages.registration) { %>
+                         <% for (var x of messages.registration) { %>
+                          <h3 class="text-info text-center"><%= x %></h3>
+                         <% } %>
+                     <% } %>
+                <div class="row">
+                    <a href="/owls/<%=owl._id%>" class="btn btn-info text-dark text-center mx-auto col-6">Back</a>
+                </div>
+                <form action="/owls/<%=owl._id%>" method='post'>
+                    <input type="text" name="name" class="form-control" value="<%=owl.name%>">
+                    <hr class="my-3 bg-info">
+                    <input type="text" name="age" class="form-control" value="<%=owl.age%>">
+                    <hr class="my-3 bg-info">
+                    <input type="text" name="color" class="form-control" value="<%=owl.color%>">
+                    <hr class="my-3 bg-info">
+                    <input type="text" name="breed" class="form-control" value="<%=owl.breed%>">
+                    <hr class="my-3 bg-info">
+                    <input class="btn btn-info w-100 text-dark" type="submit" value="Add your owl!">
+                    <hr class="my-3 bg-info">
+                </form>
+                
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>
