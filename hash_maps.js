@@ -31,7 +31,19 @@ hashInsert = function(map, object){
     map[idx] = [[key[x], object[key[x]]]]
     }
     else{
+        for(var y = 0; y<map[idx].length; y++){
+            var marker = 0;
+            if(map[idx][y][0] == key[x]){
+                marker = y;
+            }
+        }
+        if(marker>0){
+            map[idx][marker][1] = object[key[x]]
+        }
+        else{
         map[idx].push([key[x], object[key[x]]])
+        }
+        
     }
     }
     console.log(map)
@@ -41,7 +53,8 @@ hashInsert = function(map, object){
 }
 
 hashInsert(hashMap, {'key':'value', 'otherkey':'othervalue','lastkey':'lastvalue'})
-hashInsert(hashMap, {'testkey':'testvalue', 'othertestkey':'othertestvalue','finaltestkey':'finaltestvalue', 'finaltestkey':'THEWRENCH'})
+hashInsert(hashMap, {'testkey':'testvalue', 'othertestkey':'othertestvalue','finaltestkey':'finaltestvalue'})
+hashInsert(hashMap, {'finaltestkey':'THEWRENCH'})
 
 hashLookup = function(map, key){
     const lookup = key;
