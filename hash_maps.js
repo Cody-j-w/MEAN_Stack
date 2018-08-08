@@ -73,3 +73,34 @@ hashLookup = function(map, key){
 }
 
 console.log(hashLookup(hashMap, 'finaltestkey'))
+
+hashGrow =map=>{
+    map.length = Math.floor(map.length * 1.5);
+    
+    for(i = 0; i<map.length; i++){
+        if(map[i] == null){
+            continue;
+        }
+        else{
+
+            console.log("we're at index "+i )
+            for(j = 0; j<map[i].length; j++){
+                lookup = map[i][j][0]
+                console.log(lookup)
+                var idx = mod(lookup.hashCode(), map.length);
+                console.log(idx)
+            //     console.log(idx)
+            //     if(map[idx] == null){
+            //     map[idx] = [[map[i][j][0], map[i][j][1]]]
+            //     }
+            //     else{
+            //     map[idx].push(map[i][j])
+            //     }
+            }
+            
+        }
+    }
+    console.log(map)
+}
+
+hashGrow(hashMap)
