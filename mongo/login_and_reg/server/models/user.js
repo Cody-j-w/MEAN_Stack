@@ -9,5 +9,5 @@ const UserSchema = new mongoose.Schema({
     birthday:{type:Date, required:[true, 'please provide a birthday']}
 }, {timestamps:true})
 
-UserSchema.plugin(uniqueValidator, {message:'email already taken! '});
+UserSchema.plugin(uniqueValidator, {message:'email already taken!'});
 mongoose.model('User', UserSchema)
