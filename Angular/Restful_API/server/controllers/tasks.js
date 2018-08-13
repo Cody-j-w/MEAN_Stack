@@ -3,55 +3,24 @@ const Task = mongoose.model('Task');
 
 module.exports = {
     index: (req,res)=>{
-        Task.find({}, (err, tasksFromDB)=>{
-            if(err){
-                res.json({message:'Error!', error:err})
-            }
-            else{
-                res.json({message:'success!', data:tasksFromDB})
-            }
-        })
+        Task.find({})
+        .then(tasks => res.json(tasks))
+        .catch(err => res.send(err))
     },
     show: (req, res)=>{
-        Task.findOne({_id:req.params.id}, (err, tasksFromDB)=>{
-            if(err){
-                res.json({message:'Error!', error:err})
-            }
-            else{
-                res.json({message:'success!', data:tasksFromDB})
-            }
-        })
+        Task.findOne({_id:req.params.id})
+        .then(task => res.json(task))
+        .catch(err => res.send(err))
     },
     create:(req,res)=>{
-        let task = new Task(req.body)
-        task.save(function(err){
-            if(err){
-                res.json({message:'Error!', error:err})
-            }
-            else{
-                res.json({message:'success!', data:task})
-            }
-        })
+        Task.create(req.body)
+        .then(task => res.json(task))
+        .catch(err => res.send(err))
     },
     update:(req,res)=>{
-        Task.findOne({_id:req.params.id}, (err, task)=>{
-            if(err){
-                res.json({message:'Error!', error:err})
-            }
-            else{
-                task.title = req.body.title
-                task.description = req.body.description
-                task.completed = req.body.completed
-                task.save(function(err){
-                    if(err){
-                        res.json({message:'Error!', error:err})
-                    }
-                    else{
-                        res.json({message:'success!', data:task})
-                    }
-                })
-            }
-        })
+        Task.findByIdAndUpdate(req.params.id, {$set: req.body})
+        .then(task => res.json(task))
+        .catch(err => res.send(err))
     },
     delete:(req,res)=>{
         Task.deleteOne({_id:req.params.id}, (err)=>{
