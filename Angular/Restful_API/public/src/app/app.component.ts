@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
   newTask: any;
   deleteTask: any;
   updateTask: any;
+  selectedTask:any;
 
 
 
@@ -39,6 +40,11 @@ export class AppComponent implements OnInit {
   onButtonClickDelete(task) {
     console.log(task._id)
     this.deleteTasksFromService(task)
+  }
+  onButtonClickSelect(task){
+    this.selectedTask = task;
+    console.log(this.selectedTask)
+    
   }
 
 

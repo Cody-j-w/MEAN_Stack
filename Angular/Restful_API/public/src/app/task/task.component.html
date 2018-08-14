@@ -1,0 +1,19 @@
+<table>
+  <tr>
+    <td>Task</td>
+    <td>{{ taskToShow.title }}</td>
+  </tr>
+    <tr>
+      <td>Description</td>
+    <td>{{ taskToShow.description }}</td> 
+    </tr>
+    <tr>
+      <td>Complete?</td>
+      <td>{{taskToShow.completed}}</td>
+    </tr>
+    <tr>
+      <td>Created at:</td>
+      <td>{{taskToShow.createdAt}}</td>
+    </tr>
+   <button (click)="deleteTask(taskToShow)">Delete</button>
+   </table>

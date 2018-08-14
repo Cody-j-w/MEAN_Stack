@@ -25,54 +25,45 @@
   </table>
   </form>
 </div>
-<div class="createForm" *ngIf='showing'>
-    <h2>Update a task</h2>
-   <form (submit)='update(task)'>
-      <table>
-          <tr>
-      <td>Task:</td> 
-      <td><input type="text" name="updateTask.title" 
-      [(ngModel)]="updateTask.title"></td>
-      </tr>
-      
-      <tr>
-      <td>Description:</td> 
-      <td><input type="text" name="updateTask.description" 
-      [(ngModel)]="updateTask.description"></td>
-      </tr>
-      <tr>
-          <td>Complete?</td>
-          <td><input type='checkbox' name='updateTask.completed' [(ngModel)]='updateTask.completed'> </td>
-        </tr>
-       
-      <tr>
-        <td>
-      <input type="submit" value="update">
-      </td>
-      </tr>
-      </table>
-   </form>
-  </div>
 
+<div class="createForm" *ngIf='showing'>
+  <h2>Update a task</h2>
+ <form (submit)='update(task)'>
+    <table>
+        <tr>
+    <td>Task:</td> 
+    <td><input type="text" name="updateTask.title" 
+    [(ngModel)]="updateTask.title"></td>
+    </tr>
+    
+    <tr>
+    <td>Description:</td> 
+    <td><input type="text" name="updateTask.description" 
+    [(ngModel)]="updateTask.description"></td>
+    </tr>
+    <tr>
+        <td>Complete?</td>
+        <td><input type='checkbox' name='updateTask.completed' [(ngModel)]='updateTask.completed'> </td>
+      </tr>
+     
+    <tr>
+      <td>
+    <input type="submit" value="update">
+    </td>
+    </tr>
+    </table>
+ </form>
+</div>
+
+<app-task *ngIf='selectedTask' [taskToShow]='selectedTask' (eventToUse)='deleteTasksFromService($event)'></app-task>
   
     <div *ngFor="let task of tasks">
-        <table>
-          <tr>
-            <td>Task</td>
-            <td>{{ task.title }}</td>
-          </tr>
-            <tr>
-              <td>Description</td>
-            <td>{{ task.description }}</td> 
-            </tr>
-            <tr>
-              <td>Complete?</td>
-              <td>{{task.completed}}</td>
-            </tr>
-           
-           <button (click)="onButtonClickParam(task)">Edit</button>
-           <button (click)="onButtonClickDelete(task)">Delete</button>
-        </table>
+        
+      <button (click)="onButtonClickParam(task)">Edit</button>
+           <button (click)='onButtonClickSelect(task)'>Select</button>
+
       
       </div>
+
+      
 
