@@ -1,7 +1,7 @@
 import {HttpService} from './http.service';
 import { Component, OnInit } from '@angular/core';
 import {identifierModuleUrl} from '@angular/compiler';
-import { MAX_LENGTH_VALIDATOR } from '@angular/forms/src/directives/validators';
+
 
 @Component({
   selector: 'app-root',

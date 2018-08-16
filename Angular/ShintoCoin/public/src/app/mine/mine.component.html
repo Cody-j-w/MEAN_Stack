@@ -1,0 +1,21 @@
+<div class="row">
+    <h1 class="display-4 text-info">Mine ShintoCoin!</h1>
+  </div>
+  <div class="row">
+  <div class="col-2"></div>
+  <div>
+    <h3>Current ShintoCoin Value: ${{ShintoVal}}.00</h3>
+    <h3>Your ShintoCoin total: {{Shintowned}} coins</h3>
+    <h1 class="text-warning">{{displayed_algo}}</h1>
+    <div *ngIf='wrong_answer'>
+      <h2 class="text-danger">Wrong!</h2>
+    </div>
+    <div *ngIf='correct_answer'>
+      <h2 class="text-success">Correct!</h2>
+    </div>
+    <form (submit)='mineShinto(answer)'>
+      <input type="text" class="form-control col-9 d-inline-block" name="answer" [(ngModel)]='answer'>
+      <input type="submit" value="buy!" class="d-inline-block btn btn-info col-2">
+    </form>
+  </div>
+  </div>

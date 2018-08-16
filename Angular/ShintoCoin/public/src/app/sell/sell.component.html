@@ -1,0 +1,14 @@
+<div class="row">
+    <h1 class="display-4 text-info">Sell ShintoCoin!</h1>
+  </div>
+  <div class="row">
+  <div class="col-2"></div>
+  <div>
+    <h3>Current ShintoCoin Value: ${{ShintoVal}}.00</h3>
+    <h3>Your ShintoCoin total: {{Shintowned}} coins</h3>
+    <form (submit)='sellShinto(num)'>
+      <input type="number" class="form-control col-9 d-inline-block" name="num" [(ngModel)]='num'>
+      <input type="submit" value="sell!" class="d-inline-block btn btn-info col-2">
+    </form>
+  </div>
+  </div>
