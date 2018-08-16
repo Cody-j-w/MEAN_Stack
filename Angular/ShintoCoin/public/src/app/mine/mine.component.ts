@@ -55,14 +55,17 @@ displayAlgo(){
 mineShinto(answer){
   if(answer != this.algo_answer){
     this.wrong_answer = answer;
+    
   }
   else if(answer == this.algo_answer){
     this.correct_answer = answer;
-    this.Shintowned+=1;
-    this.ShintoVal+=1;
+    let num = 1;
+    this._httpService.incrementVal(num);
+    this._httpService.addShinto(num);
     this.getValue();
     this.getQuant();
     this.displayAlgo();
+    
   }
 }
 }
