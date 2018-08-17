@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+  <button [routerLink]="['/add-owl']" class="mx-auto col-6 btn btn-info text-primary">Add an owl to the Parliment</button>
+  </div>
+  <hr class="my-3 col-6 bg-info">
+  <table class="table table-secondary table-bordered">
+    <thead>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Color</th>
+      <th>Breed</th>
+      <th>Actions</th>
+    </thead>
+    <tbody *ngFor='let owl of owls'>
+      <tr>
+        <td>{{owl.name}}</td>
+        <td>{{owl.age}}</td>
+        <td>{{owl.color}}</td>
+        <td>{{owl.breed}}</td>
+        <td><button  [routerLink]="['/one-owl/', owl._id]" class="btn btn-info text-primary">Show details</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

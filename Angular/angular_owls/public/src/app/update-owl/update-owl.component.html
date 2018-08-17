@@ -1,0 +1,29 @@
+<div class="container">
+  
+    <form *ngIf='owl' (submit)='updateOwl(owl)'>
+        <table class="table table-secondary text-info">
+      <tr>
+        <td><h4>Owl name:</h4></td>
+      <td><input type="text" class="form-control" value="{{owl.name}}" name="owl.name" [(ngModel)]="owl.name"></td>
+      </tr>
+      <tr>
+        <td><h4>Owl age:</h4></td>
+      <td><input type="text" class="form-control" value="{{owl.age}}" name="owl.age" [(ngModel)]="owl.age"></td>
+      </tr>
+      <tr>
+        <td><h4>Owl color:</h4></td>
+      <td><input type="text" class="form-control" value="{{owl.color}}" name="owl.color" [(ngModel)]="owl.color"></td>
+      </tr>
+      <tr>
+        <td><h4>Owl breed:</h4></td>
+      <td><input type="text" class="form-control" value="{{owl.breed}}" name="owl.breed" [(ngModel)]="owl.breed"></td>
+      </tr>
+      <tr>
+        <td colspan='2'>
+          <input type="submit" class="btn btn-info text-primary mx-auto col-6" value="Submit changes">
+        </td>
+      </tr>
+    </table>
+    </form>
+    
+  </div>
