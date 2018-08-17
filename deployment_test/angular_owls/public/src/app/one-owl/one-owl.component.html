@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="mx-auto">
+      <table *ngIf='owl' class="table table-secondary table-bordered table-striped">
+        <tr>
+          <th><h3 class="text-info">Name:</h3></th>
+          <td><h3 class="text-info">{{owl.name}}</h3></td>
+        </tr>
+        <tr>
+          <th><h3 class="text-info">Age:</h3></th>
+          <td><h3 class="text-info">{{owl.age}}</h3></td>
+        </tr>
+        <tr>
+          <th><h3 class="text-info">Color:</h3></th>
+          <td><h3 class="text-info">{{owl.color}}</h3></td>
+        </tr>
+        <tr>
+          <th><h3 class="text-info">Breed:</h3></th>
+          <td><h3 class="text-info">{{owl.breed}}</h3></td>
+        </tr>
+        <tr>
+          <td><h3 class="text-info">Actions:</h3></td>
+          <td><button [routerLink]="['/update-owl', owl._id]" class="btn btn-info text-primary col-6">Update</button><button (click)='removeOwl(owl)' [routerLink]="['/']" class="btn btn-danger text-primary col-6">Delete</button></td>
+        </tr>
+      </table>
+    </div>
+  </div>
