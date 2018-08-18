@@ -1,0 +1,12 @@
+<div class="container">
+    <hr class="my-4 bg-primary">
+    <div class="row">
+      <button [routerLink]="['details', Review_id]" class="btn btn-primary text-dark col-2">Review details</button>
+      <div class="col-3"></div>
+      <button [routerLink]="['author', Author_id]" class="btn btn-primary text-dark col-2">Reviews by author</button>
+      <div class="col-3"></div>
+      <button [routerLink]="['all', Product_id]" class="btn btn-primary text-dark col-2">All reviews</button>
+    </div>
+    
+  </div>
+  <router-outlet></router-outlet>
