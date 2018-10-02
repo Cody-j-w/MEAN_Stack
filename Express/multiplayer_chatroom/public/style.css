@@ -9,3 +9,12 @@
 
 }
 
+.enemy-select{
+    font-weight: bolder;
+    color: darkred;
+}
+
+.fighter-select{
+    font-weight: bolder;
+    color: darkgreen;
+}

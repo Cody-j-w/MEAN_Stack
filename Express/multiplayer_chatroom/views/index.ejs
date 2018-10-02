@@ -95,18 +95,18 @@
         socket.on('attack', function(data){
             console.log(data.user, data.opponent)
             if(data.user.status == 1){
-            $('.chat_header').append(`<p>${data.user.name} strikes ${data.opponent.name} for 10 damage!`)
+            $('.chat_header').append(`<p class="text-danger">${data.user.name} strikes ${data.opponent.name} for 10 damage!`)
             $('.chat_header').append(`<p>${data.user.name}: ${data.user.health}`)
             $('.chat_header').append(`<p>${data.opponent.name}: ${data.opponent.health}`)
             $('#chat_window').scrollTop($('#chat_window')[0].scrollHeight - $('#chat_window')[0].clientHeight);
             }
             else if(data.user.status == 2){
-                $('.chat_header').append(`<p>${data.opponent.name} blocks ${data.user.name}'s attack!`)
+                $('.chat_header').append(`<p class="text-info">${data.opponent.name} blocks ${data.user.name}'s attack!`)
                 $('#chat_window').scrollTop($('#chat_window')[0].scrollHeight - $('#chat_window')[0].clientHeight);
             }
         })
         socket.on('block_up', function(data){
-                $('.chat_header').append(`<p>${data.user.name} goes into a defensive stance!`)
+                $('.chat_header').append(`<p class="text-success">${data.user.name} goes into a defensive stance!`)
                 $('#chat_window').scrollTop($('#chat_window')[0].scrollHeight - $('#chat_window')[0].clientHeight);
         })
         socket.on('guard_break', function(data){
@@ -114,16 +114,16 @@
             $('.chat_header').append(`<p>${data.user.name} breaks through ${data.opponent.name}'s defenses!`)
             }
             else{
-            $('.chat_header').append(`<p>${data.user.name} loses balance and is stunned!`)
+            $('.chat_header').append(`<p class="text-warning">${data.user.name} loses balance and is stunned!`)
             }
             $('#chat_window').scrollTop($('#chat_window')[0].scrollHeight - $('#chat_window')[0].clientHeight);
         })
         socket.on('recovered', function(data){
-            $('.chat_header').append(`<p>${data.user.name} recovers!`)
+            $('.chat_header').append(`<p class="text-primary">${data.user.name} recovers!`)
             $('#chat_window').scrollTop($('#chat_window')[0].scrollHeight - $('#chat_window')[0].clientHeight);
         })
         socket.on('game_over', function(data){
-            $('.chat_header').append(`<p>${data.user.name} is victorious over ${data.opponent.name}!`)
+            $('.chat_header').append(`<p class="text-primary">${data.user.name} is victorious over ${data.opponent.name}!`)
             $('#chat_window').scrollTop($('#chat_window')[0].scrollHeight - $('#chat_window')[0].clientHeight);
         })
         
@@ -151,6 +151,7 @@
             <div id="fight_picker" class="col-6 mx-auto">
                 
                 <form id="match_listing">
+                    <p class="lead fighter-select">Select your fighter!</p>
                     <select id="fighter_select" class="form-control col-8 d-inline-block">
                         <option id="match_header" disabled>Select fighter</option>
                         <option value="0">Ryu</option>
@@ -160,7 +161,9 @@
                         <option value="4">Cammy</option>
                         <option value="5">Bison</option>
                     </select>
-                    <select id="match" class="form-control col-8 d-inline-block">
+                    <hr class="bg-primary my-2">
+                    <p class="lead enemy-select">Select your opponent!</p>
+                    <select id="match" class="form-control col-8">
                         <option id="match_header" disabled>Select opponent</option>
                         <option value="0">Ryu</option>
                         <option value="1">Ken</option>
@@ -168,9 +171,12 @@
                         <option value="3">Laura</option>
                         <option value="4">Cammy</option>
                         <option value="5">Bison</option>
-                    </select><!--
-                    --><input type="submit" class="btn btn-info col-4 d-inline-block" value="Fight!">
+                    </select>
+                    <hr class="bg-primary my-2">
+                    <input type="submit" class="btn btn-info col-8" value="Fight!">
                 </form>
+
+                <hr class="bg-primary my-3">
             </div>
         </div>
         <div class="row">
@@ -186,6 +192,7 @@
              --><button id="recover" class="btn btn-success text-light col-2">Recover!</button>
             </div>
         </div>
+        <hr class="bg-primary my-5">
     
     
     </div>

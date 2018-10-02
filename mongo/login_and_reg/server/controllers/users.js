@@ -23,7 +23,7 @@ module.exports = {
                 res.redirect('/')
             }
             else{
-                user.password =  bcrypt.hashSync(req.body.password, 12)
+                user.password = bcrypt.hashSync(req.body.password, 12)
                 user.save(function(err){
                     console.log('success!')
                     req.flash('info', 'Successfully registered!')
