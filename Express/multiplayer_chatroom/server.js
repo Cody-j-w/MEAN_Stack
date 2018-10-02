@@ -175,75 +175,105 @@ io.on('connection', function(socket){
         io.emit('challenged', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
     })
     socket.on('strike', function(){
-        console.log(user.fighter, user.opponent)
-    contenders[user.fighter].strike(contenders[user.opponent]);
-    console.log(contenders[user.opponent].health)
-    if(contenders[user.fighter].status == 3){
-        socket.emit('stunned', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
-        socket.broadcast.emit('opponent_stunned', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
-    }
-    else if(contenders[user.fighter].status == 5){
-        socket.emit('stunned', {user:contenders[user.fighter]})
-    }
-    else{
-        if(contenders[user.opponent].health <=0){
-            io.emit('game_over', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
+        if(!user.fighter)
+        {
+            socket.emit('InvalidFight')
         }
         else{
-        io.emit('attack', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
+                console.log(user.fighter, user.opponent)
+            contenders[user.fighter].strike(contenders[user.opponent]);
+            console.log(contenders[user.opponent].health)
+            if(contenders[user.fighter].status == 3){
+                socket.emit('stunned', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
+                socket.broadcast.emit('opponent_stunned', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
+            }
+            else if(contenders[user.fighter].status == 5){
+                socket.emit('stunned', {user:contenders[user.fighter]})
+            }
+            else{
+                if(contenders[user.opponent].health <=0){
+                    io.emit('game_over', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
+                }
+                else{
+                io.emit('attack', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
+                }
+            }
         }
-    }
         
     })
     socket.on('defend', function(){
-        contenders[user.fighter].defend(contenders[user.opponent]);
-        if(user.status ==3){
-            socket.emit('stunned', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
-            io.emit('opponent_stunned', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
-        }
-        else if(contenders[user.fighter].status == 5){
-            socket.emit('stunned', {user:contenders[user.fighter]})
+        if(!user.fighter)
+        {
+            socket.emit('InvalidFight')
         }
         else{
-            socket.emit('defending', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
-            io.emit('block_up', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
+            contenders[user.fighter].defend(contenders[user.opponent]);
+            if(user.status ==3){
+                socket.emit('stunned', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
+                io.emit('opponent_stunned', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
+            }
+            else if(contenders[user.fighter].status == 5){
+                socket.emit('stunned', {user:contenders[user.fighter]})
+            }
+            else{
+                socket.emit('defending', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
+                io.emit('block_up', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
+            }
         }
     })
     socket.on('feign', function(){
-        contenders[user.fighter].defend(contenders[user.opponent]);
-        if(user.status ==3){
-            socket.emit('stunned', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
-            io.emit('opponent_stunned', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
-        }
-        else if(contenders[user.fighter].status == 5){
-            socket.emit('stunned', {user:contenders[user.fighter]})
+        if(!user.fighter)
+        {
+            socket.emit('InvalidFight')
         }
         else{
-        contenders[user.fighter].block = false;
-        io.emit('block_up', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
+            contenders[user.fighter].defend(contenders[user.opponent]);
+            if(user.status ==3){
+                socket.emit('stunned', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
+                io.emit('opponent_stunned', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
+            }
+            else if(contenders[user.fighter].status == 5){
+                socket.emit('stunned', {user:contenders[user.fighter]})
+            }
+            else{
+            contenders[user.fighter].block = false;
+            io.emit('block_up', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
+            }
         }
     })
     socket.on('break', function(){
-        contenders[user.fighter].break(contenders[user.opponent]);
-        if(contenders[user.fighter].status == 3){
-            socket.emit('stunned', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
-            io.emit('opponent_stunned', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
-        }
-        else if(contenders[user.fighter].status == 5){
-            socket.emit('stunned', {user:contenders[user.fighter]})
+        if(!user.fighter)
+        {
+            socket.emit('InvalidFight')
         }
         else{
-            io.emit('guard_break', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
+            contenders[user.fighter].break(contenders[user.opponent]);
+            if(contenders[user.fighter].status == 3){
+                socket.emit('stunned', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
+                io.emit('opponent_stunned', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
+            }
+            else if(contenders[user.fighter].status == 5){
+                socket.emit('stunned', {user:contenders[user.fighter]})
+            }
+            else{
+                io.emit('guard_break', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
+            }
         }
     })
     
     socket.on('heal', function(){
-        contenders[user.fighter].recover(contenders[user.opponent]);
-        if(contenders[user.fighter].status == 5){
-            socket.emit('stunned', {user:contenders[user.fighter]})
+        if(!user.fighter)
+        {
+            socket.emit('InvalidFight')
         }
-        socket.emit('healed', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
-        io.emit('recovered', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
+        else{
+            contenders[user.fighter].recover(contenders[user.opponent]);
+            if(contenders[user.fighter].status == 5){
+                socket.emit('stunned', {user:contenders[user.fighter]})
+            }
+            socket.emit('healed', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
+            io.emit('recovered', {user:contenders[user.fighter], opponent:contenders[user.opponent]})
+        }
     })
 
 })

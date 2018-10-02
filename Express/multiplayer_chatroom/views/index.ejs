@@ -126,6 +126,10 @@
             $('.chat_header').append(`<p class="text-primary">${data.user.name} is victorious over ${data.opponent.name}!`)
             $('#chat_window').scrollTop($('#chat_window')[0].scrollHeight - $('#chat_window')[0].clientHeight);
         })
+        socket.on("InvalidFight", function(){
+            $('.chat_header').append(`<p class="text-dark">Please register to fight! Select a fighter and an opponent from the dropdowns below.</p>`)
+            $('#chat_window').scrollTop($('#chat_window')[0].scrollHeight - $('#chat_window')[0].clientHeight);
+        })
         
     });
     </script>
@@ -147,6 +151,20 @@
         </div>
         </div>
         <hr class="my-3 bg-danger col-8">
+        <div class="row">
+                <div class="col-4 mx-auto" id="join_the_fight">
+                    <button id="fight" class="btn btn-danger text-dark mx-auto w-100" >Join the fight!</button>
+                </div>
+                <div id="test_your_might" class="mx-auto col-8">
+                    <div class="col-2"></div><!--
+                 --><button id="strike" class="btn btn-danger text-dark col-2">Strike!</button><!--  
+                 --><button id="block" class="btn btn-primary text-light col-2">Block!</button><!--
+                 --><button id="feign" class="btn btn-info text-light col-2">Feign!</button><!--  
+                 --><button id="break" class="btn btn-warning text-dark col-2">Break!</button><!--  
+                 --><button id="recover" class="btn btn-success text-light col-2">Recover!</button>
+                </div>
+            </div>
+            <hr class="bg-primary my-2 col-8">
         <div class="row">
             <div id="fight_picker" class="col-6 mx-auto">
                 
@@ -179,19 +197,7 @@
                 <hr class="bg-primary my-3">
             </div>
         </div>
-        <div class="row">
-            <div class="col-4 mx-auto" id="join_the_fight">
-                <button id="fight" class="btn btn-danger text-dark mx-auto w-100" >Join the fight!</button>
-            </div>
-            <div id="test_your_might" class="mx-auto col-8">
-                <div class="col-2"></div><!--
-             --><button id="strike" class="btn btn-danger text-dark col-2">Strike!</button><!--  
-             --><button id="block" class="btn btn-primary text-light col-2">Block!</button><!--
-             --><button id="feign" class="btn btn-info text-light col-2">Feign!</button><!--  
-             --><button id="break" class="btn btn-warning text-dark col-2">Break!</button><!--  
-             --><button id="recover" class="btn btn-success text-light col-2">Recover!</button>
-            </div>
-        </div>
+        
         <hr class="bg-primary my-5">
     
     
